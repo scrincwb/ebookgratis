@@ -47,3 +47,10 @@ const Features: React.FC = () => {
               <p className="text-gray-500 text-sm leading-relaxed font-medium">{f.desc}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Features;

@@ -8,71 +8,69 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onDownload }) => {
   return (
     <section className="gradient-bg text-white py-16 md:py-28 px-4 overflow-hidden relative border-b-8 border-yellow-400">
-      {/* Elementos Decorativos de Fundo */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full blur-[150px] opacity-20 -mr-20 -mt-20"></div>
+      <div className="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
       
       <div className="container mx-auto flex flex-col md:flex-row items-center relative z-10">
         <div className="md:w-1/2 mb-12 md:mb-0 text-center md:text-left">
-          <div className="inline-block bg-yellow-400 text-blue-950 px-4 py-1.5 rounded-full text-[10px] font-black mb-6 tracking-widest uppercase shadow-lg border-2 border-white/20">
-            CONFIRMADO: GUIA ATUALIZADO 2025
+          <div className="inline-block bg-yellow-400 text-blue-950 px-4 py-1.5 rounded-full text-xs font-black mb-6 tracking-widest uppercase shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+            🔥 GUIA DEFINITIVO 2025
           </div>
           
-          <h1 className="text-4xl md:text-7xl font-black leading-[1] mb-6 uppercase tracking-tighter italic">
-            NÃO SEJA <span className="text-yellow-400 underline decoration-blue-500">ENGANADO</span> <br/>
-            NO PARAGUAI!
+          <h1 className="text-5xl md:text-8xl font-black leading-[0.9] mb-6 uppercase tracking-tighter text-shadow-lg">
+            COMPRE NO <br/>
+            <span className="text-yellow-400">PARAGUAI</span> <br/>
+            COM <span className="underline decoration-blue-500">SEGURANÇA!</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-blue-100 mb-10 max-w-lg leading-relaxed font-medium">
-            Aprenda a encontrar as melhores lojas, fuja dos golpistas de rua e economize até <span className="text-yellow-400 font-bold">70% comparado ao Brasil</span>.
+          <p className="text-xl md:text-2xl text-blue-50 mb-10 max-w-lg leading-relaxed font-bold opacity-95">
+            O manual que os golpistas de rua não querem que você leia. Baixe agora e economize milhares de reais.
           </p>
           
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
             <button 
               onClick={onDownload}
-              className="bg-yellow-400 text-blue-950 px-8 py-5 rounded-2xl font-black text-xl btn-shadow hover:bg-yellow-300 transition-all transform hover:-translate-y-2 flex items-center justify-center border-b-8 border-yellow-600 active:border-b-0 active:translate-y-1 group"
+              className="bg-yellow-400 text-blue-950 px-10 py-6 rounded-2xl font-black text-2xl shadow-[0_20px_50px_rgba(234,179,8,0.3)] hover:bg-yellow-300 transition-all transform hover:-translate-y-2 flex items-center justify-center border-b-8 border-yellow-600 active:border-b-0 active:translate-y-1 group"
             >
-              BAIXAR E-BOOK GRÁTIS
-              <i className="fas fa-arrow-right ml-3 transition-transform group-hover:translate-x-2"></i>
+              RESGATAR E-BOOK GRÁTIS
+              <i className="fas fa-download ml-4 animate-bounce"></i>
             </button>
           </div>
           
-          <div className="mt-10 flex items-center justify-center md:justify-start space-x-3">
+          <div className="mt-12 flex items-center justify-center md:justify-start space-x-4">
              <div className="flex -space-x-3">
                 {[1,2,3,4,5].map(i => (
-                  <img key={i} className="w-10 h-10 rounded-full border-2 border-blue-900" src={`https://i.pravatar.cc/100?img=${i+20}`} alt="Seguidor" />
+                  <img key={i} className="w-12 h-12 rounded-full border-2 border-blue-900 shadow-lg" src={`https://i.pravatar.cc/150?img=${i+10}`} alt="Seguidor" />
                 ))}
              </div>
-             <p className="text-sm font-bold text-blue-200">
-               <span className="text-white">+18.400</span> inscritos já garantiram o deles
+             <p className="text-sm font-black text-blue-100 uppercase tracking-tight">
+               <span className="text-yellow-400 text-lg">+18 MIL</span> PESSOAS JÁ BAIXARAM
              </p>
           </div>
         </div>
         
         <div className="md:w-1/2 relative flex justify-center items-center">
-          {/* Mockup do Ebook */}
-          <div className="relative z-10 w-64 md:w-80 h-[450px] md:h-[550px] bg-white rounded-[2rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] p-4 floating border-4 border-yellow-400 overflow-hidden">
-            <div className="h-full bg-gradient-to-b from-blue-50 to-white rounded-[1.5rem] flex flex-col items-center justify-center text-center p-6 border border-gray-100">
-               <div className="bg-blue-900 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-xl">
-                  <i className="fas fa-shopping-bag text-yellow-400 text-3xl"></i>
-               </div>
-               <h3 className="text-blue-900 text-xl font-black leading-tight uppercase mb-2">GUIA DE COMPRAS<br/>CDE 2025</h3>
-               <p className="text-[10px] text-gray-400 font-bold tracking-[0.2em] mb-6">DIRETAMENTE DA FRONTEIRA</p>
-               <div className="w-12 h-1.5 bg-yellow-400 rounded-full mb-6"></div>
-               <div className="space-y-2 text-left w-full px-2">
-                  <div className="flex items-center text-[10px] font-bold text-blue-900/60 uppercase">
-                     <i className="fas fa-check text-green-500 mr-2"></i> Lista de Lojas VIP
-                  </div>
-                  <div className="flex items-center text-[10px] font-bold text-blue-900/60 uppercase">
-                     <i className="fas fa-check text-green-500 mr-2"></i> Mapas de Segurança
-                  </div>
-                  <div className="flex items-center text-[10px] font-bold text-blue-900/60 uppercase">
-                     <i className="fas fa-check text-green-500 mr-2"></i> Dicas de Câmbio
-                  </div>
-               </div>
-               <div className="mt-auto pt-4 border-t border-gray-100 w-full text-[10px] font-black text-red-600 animate-pulse">
-                  CONTEÚDO EXCLUSIVO
-               </div>
-            </div>
+          <div className="relative z-10 w-72 md:w-96 p-4 floating">
+             <div className="bg-white rounded-[2.5rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] border-4 border-yellow-400 overflow-hidden">
+                <div className="bg-blue-900 p-8 text-center border-b-4 border-yellow-400">
+                   <img src="https://i.imgur.com/T2jVNRX.png" alt="Logo" className="h-20 mx-auto mb-4 brightness-110" />
+                   <h2 className="text-yellow-400 text-2xl font-black italic">GUIA SEGURO</h2>
+                   <p className="text-white text-[10px] font-bold tracking-[0.3em] uppercase opacity-70">Ciudad del Este</p>
+                </div>
+                <div className="p-8 space-y-4 bg-gray-50">
+                   <div className="flex items-center text-blue-900 font-black text-sm uppercase">
+                      <i className="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Lojas Oficiais
+                   </div>
+                   <div className="flex items-center text-blue-900 font-black text-sm uppercase">
+                      <i className="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Câmbio sem Taxas
+                   </div>
+                   <div className="flex items-center text-blue-900 font-black text-sm uppercase">
+                      <i className="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Fuja dos Golpes
+                   </div>
+                   <div className="mt-8 pt-4 border-t border-gray-200">
+                      <p className="text-blue-900/40 text-[9px] font-bold text-center uppercase tracking-widest">Acesso Vitalício e Gratuito</p>
+                   </div>
+                </div>
+             </div>
           </div>
         </div>
       </div>

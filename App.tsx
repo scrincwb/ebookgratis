@@ -5,79 +5,127 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import ShoppingAssistant from './components/ShoppingAssistant';
 import Footer from './components/Footer';
-
-const EBOOK_URL = "https://www.diretamentedafronteira.com.br/ebook-guia-completo.pdf";
+import LeadForm from './components/LeadForm';
+import DownloadPage from './components/DownloadPage';
+import { UserLead } from './types';
 
 const App: React.FC = () => {
   const [showChat, setShowChat] = useState(false);
+  const [viewState, setViewState] = useState<'LANDING' | 'FORM' | 'DOWNLOAD'>('LANDING');
+  const [userData, setUserData] = useState<UserLead | null>(null);
 
-  const handleDownload = () => {
-    window.open(EBOOK_URL, '_blank');
+  const openForm = () => {
+    setViewState('FORM');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const handleLeadSubmit = (data: UserLead) => {
+    setUserData(data);
+    setViewState('DOWNLOAD');
+  };
+
+  if (viewState === 'DOWNLOAD' && userData) {
+    return (
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <Header onDownload={() => {}} />
+        <main className="flex-grow">
+          <DownloadPage userName={userData.name} />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header onDownload={handleDownload} />
+      <Header onDownload={openForm} />
       
       <main className="flex-grow">
-        <Hero onDownload={handleDownload} />
-        
-        <section id="features">
-          <Features />
-        </section>
-
-        {/* Seção Informativa Rápida */}
-        <div className="py-12 bg-blue-50">
-          <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
-            <div className="bg-white p-8 rounded-3xl shadow-sm border-2 border-blue-100 transform hover:scale-105 transition">
-              <h3 className="font-black text-blue-900 mb-2 uppercase tracking-tighter">Cota Terrestre</h3>
-              <p className="text-4xl font-black text-blue-600">US$ 500</p>
-              <p className="text-xs text-gray-500 mt-2 uppercase font-bold">Livre de impostos a cada 30 dias</p>
+        {viewState === 'FORM' ? (
+          <section className="py-20 px-4 animate-fade-in">
+            <div className="max-w-xl mx-auto bg-white rounded-[2rem] shadow-2xl p-8 md:p-12 border-t-8 border-yellow-400 text-center">
+              <h2 className="text-3xl font-black text-blue-900 mb-2 uppercase italic">Quase lá! 🚀</h2>
+              <p className="text-gray-500 mb-8 font-medium">Preencha abaixo para receber o acesso instantâneo ao seu Guia VIP.</p>
+              <LeadForm onSubmit={handleLeadSubmit} />
+              <button 
+                onClick={() => setViewState('LANDING')}
+                className="mt-6 text-xs text-gray-400 font-bold hover:text-blue-500 uppercase tracking-widest"
+              >
+                ← Voltar para a página inicial
+              </button>
             </div>
-            <div className="bg-white p-8 rounded-3xl shadow-sm border-2 border-green-100 transform hover:scale-105 transition">
-              <h3 className="font-black text-green-900 mb-2 uppercase tracking-tighter">Cota Aérea</h3>
-              <p className="text-4xl font-black text-green-600">US$ 1.000</p>
-              <p className="text-xs text-gray-500 mt-2 uppercase font-bold">Para voos internacionais</p>
-            </div>
-          </div>
-        </div>
+          </section>
+        ) : (
+          <>
+            <Hero onDownload={openForm} />
+            
+            <section id="features">
+              <Features />
+            </section>
 
-        {/* CTA Final */}
-        <section className="py-24 text-center px-4 bg-white">
-          <h2 className="text-3xl md:text-5xl font-black text-blue-900 mb-8 uppercase tracking-tighter">
-            Pronto para economizar no Paraguai?
-          </h2>
-          <button 
-            onClick={handleDownload}
-            className="bg-blue-900 text-white px-12 py-6 rounded-2xl font-black text-xl hover:bg-blue-800 transition-all shadow-2xl hover:-translate-y-1 active:translate-y-0"
-          >
-            BAIXAR MEU GUIA GRÁTIS <i className="fas fa-arrow-right ml-3"></i>
-          </button>
-        </section>
+            {/* Seção de Prova Social e Números */}
+            <div className="py-16 bg-blue-900 text-white border-y-4 border-yellow-400">
+              <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                  <p className="text-4xl font-black text-yellow-400">100%</p>
+                  <p className="text-[10px] uppercase font-bold tracking-widest opacity-70">Gratuito</p>
+                </div>
+                <div>
+                  <p className="text-4xl font-black text-yellow-400">50+</p>
+                  <p className="text-[10px] uppercase font-bold tracking-widest opacity-70">Lojas Seguras</p>
+                </div>
+                <div>
+                  <p className="text-4xl font-black text-yellow-400">2025</p>
+                  <p className="text-[10px] uppercase font-bold tracking-widest opacity-70">Atualizado</p>
+                </div>
+                <div>
+                  <p className="text-4xl font-black text-yellow-400">18k</p>
+                  <p className="text-[10px] uppercase font-bold tracking-widest opacity-70">Downloads</p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Final */}
+            <section className="py-24 text-center px-4 bg-white relative overflow-hidden">
+               <div className="absolute inset-0 bg-blue-50/30 -skew-y-3 transform origin-bottom-right"></div>
+               <div className="relative z-10">
+                <h2 className="text-4xl md:text-6xl font-black text-blue-900 mb-8 uppercase tracking-tighter max-w-3xl mx-auto italic">
+                  Pronto para economizar de verdade?
+                </h2>
+                <button 
+                  onClick={openForm}
+                  className="bg-yellow-400 text-blue-900 px-12 py-7 rounded-2xl font-black text-2xl hover:bg-yellow-300 transition-all shadow-[0_20px_50px_rgba(234,179,8,0.4)] hover:-translate-y-2 active:translate-y-0 border-b-8 border-yellow-600"
+                >
+                  SIM! QUERO O GUIA AGORA <i className="fas fa-bolt ml-3"></i>
+                </button>
+              </div>
+            </section>
+          </>
+        )}
       </main>
 
       <Footer />
 
       {/* Botão Flutuante do Chat */}
-      {!showChat && (
+      {!showChat && viewState === 'LANDING' && (
         <button 
           onClick={() => setShowChat(true)}
-          className="fixed bottom-6 right-6 bg-blue-900 text-white w-16 h-16 rounded-full shadow-2xl hover:scale-110 transition-all border-4 border-yellow-400 z-50 flex items-center justify-center"
+          className="fixed bottom-6 right-6 bg-blue-600 text-white w-16 h-16 rounded-full shadow-2xl hover:scale-110 transition-all border-4 border-white z-50 flex items-center justify-center animate-bounce"
         >
           <i className="fas fa-comment-dots text-2xl"></i>
-          <span className="absolute -top-2 -left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full animate-bounce">1</span>
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full border-2 border-white">IA</span>
         </button>
       )}
 
       {showChat && (
-        <div className="fixed inset-0 md:inset-auto md:bottom-24 md:right-6 z-50 animate-fade-in">
-          <div className="relative h-full md:h-auto">
+        <div className="fixed inset-0 md:inset-auto md:bottom-24 md:right-6 z-50 animate-fade-in flex flex-col items-end">
+          <div className="relative w-full max-w-lg">
             <ShoppingAssistant />
             <button 
               onClick={() => setShowChat(false)}
-              className="absolute top-4 right-4 text-white md:text-white/50 hover:text-white transition"
+              className="absolute top-4 right-4 text-white hover:text-yellow-400 transition bg-blue-950/50 w-8 h-8 rounded-full flex items-center justify-center"
             >
-              <i className="fas fa-times text-xl"></i>
+              <i className="fas fa-times text-sm"></i>
             </button>
           </div>
         </div>
