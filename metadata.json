@@ -1,0 +1,8 @@
+{
+  "name": "Diretamente da Fronteira - Ebook Gratis",
+  "description": "A landing page oficial para o eBook 'Segredos de Compras no Paraguai', com a marca Diretamente da Fronteira e assistente IA.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
